@@ -1,0 +1,11 @@
+{ 
+  "compilerOptions": {
+    "outDir": "dis",
+    "module": "commonJS",
+    "target":"ES2021", 
+    "lib": ["ES2021"],
+    "esModuleInterop": true,
+    "allowJS": true
+  },
+
+}
