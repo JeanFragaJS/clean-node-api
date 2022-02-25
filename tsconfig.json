@@ -16,14 +16,27 @@
     // fornece ajustes de comportamento no tempo de execução do mecanismo
     // JavaScript para melhorar o desempenho e faz com que um conjunto de 
     // erros seja lançado em vez de ignorá-los silenciosamente.
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@test/*": ["./test/*"]
+    },
+    "rootDirs": [
+      "./src",
+      "./test"
+    ],
+    "experimentalDecorators": true,
+    //Habilita suporte experimental para decoradores
+    "emitDecoratorMetadata": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
-  "experimentalDecorators": true,
-  //Habilita suporte experimental para decoradores
-  "emitDecoratorsMetadata": true,
-  "typesRoots": [
-    "./node_modules/@types"
+  "include": [
+    "./src/**/*.ts",
+    "./test/**/*.ts"
   ],
+
   "exclude": [
     "./node_modules/*",
     "dist"
