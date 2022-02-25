@@ -4,8 +4,29 @@
     "module": "commonJS",
     "target":"ES2021", 
     "lib": ["ES2021"],
+    //Inclui por deafault os tipos do ES2021
     "esModuleInterop": true,
-    "allowJS": true
+    "allowJs": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "allowSyntheticDefaultImports":true,
+    "alwaysStrict":true,
+    // fornece ajustes de comportamento no tempo de execução do mecanismo
+    // JavaScript para melhorar o desempenho e faz com que um conjunto de 
+    // erros seja lançado em vez de ignorá-los silenciosamente.
+    "baseUrl": "./"
   },
+  "experimentalDecorators": true,
+  //Habilita suporte experimental para decoradores
+  "emitDecoratorsMetadata": true,
+  "typesRoots": [
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "./node_modules/*",
+    "dist"
+  ]
 
 }
