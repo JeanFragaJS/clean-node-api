@@ -1,8 +1,7 @@
 {
   "*ts": [
-    "eslint 'src/**/*.ts' --ext .ts --fix",
-    "prettier --check 'src/**/*.ts'",
-    "prettier --fix 'src/**/*.ts'",
+    "yarn lint && yarn lint:fix",
+    "yarn style:check && yarn style:fix",
     "git add"
 
   ]

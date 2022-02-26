@@ -5,8 +5,14 @@
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "yarn test:unit && yarn test:functional",
+    "test:functional": "jest --projects ./test --runInBand",
+    "test:unit": "jest",
+    "test:staged": "jest",
     "lint": "eslint --ext .ts",
-    "lint:fix": "eslint --ext .ts --fix"
+    "lint:fix": "eslint --ext .ts --fix",
+    "style:check": "prettier --check src/**/*.ts test/**/*.ts",
+    "style:fix": "prettier --write src/**/*.ts test/**/*.ts" 
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
