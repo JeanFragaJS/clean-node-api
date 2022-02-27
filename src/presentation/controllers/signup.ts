@@ -1,5 +1,4 @@
-import { InvalidParamError } from '../error/invalid-param-error copy'
-import { MissingParamError } from '../error/missing-param-error'
+import { InvalidParamError, MissingParamError } from '../error'
 import { serverError } from '../helpers/http-helper'
 import { badRequest } from '../helpers/http-helper'
 import { Controller } from './protocols/controller'
@@ -30,9 +29,9 @@ export class SignUpController implements Controller{
       }
       return res
     } catch ( error ) {
-      console.log(error)
+      //console.log(error)
       return serverError()
-      
+
     }
   }
 
