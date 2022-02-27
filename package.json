@@ -11,8 +11,8 @@
     "test:staged": "jest",
     "lint": "eslint --ext .ts",
     "lint:fix": "eslint --ext .ts --fix",
-    "style:check": "prettier --check src/**/*.ts test/**/*.ts",
-    "style:fix": "prettier --write src/**/*.ts test/**/*.ts" 
+    "style:check": "yarn prettier --check src/**/*.ts test/**/*.ts",
+    "style:fix": "yarn prettier --write src/**/*.ts test/**/*.ts" 
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
