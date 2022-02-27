@@ -3,7 +3,7 @@ import { badRequest } from '../helpers/http-helper'
 import { Controller } from './protocols/controller'
 import {HttpRequest, HttpResponse} from './protocols/http'
 
-export class SignUpcontroller implements Controller{
+export class SignUpController implements Controller{
  public  handle (httpRequest: HttpRequest): HttpResponse  {
     let res: HttpResponse
     const requiredFields = ['name', 'email', 'password', 'passwordConfirm']
