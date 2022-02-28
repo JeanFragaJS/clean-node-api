@@ -7,7 +7,7 @@
   "scripts": {
     "test": "yarn test:unit && yarn test:functional",
     "test:functional": "jest --projects ./test --runInBand",
-    "test:unit": "jest --watch",
+    "test:unit": "jest",
     "lint": "eslint --ext .ts",
     "lint:fix": "eslint --ext .ts --fix",
     "style:check": "yarn prettier --check src/**/*.ts test/**/*.ts",
