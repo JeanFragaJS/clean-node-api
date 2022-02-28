@@ -1,9 +1,8 @@
-import { AddAccount } from '@src/domain/usecases/add-account'
 import {DbAddAccount} from '../db-add-account'
-import { Encrypter } from '../protocols/encrypter'
+import { Encrypter } from '../db-add-account-protocols'
 
 interface TypeSut {
-  sut: AddAccount,
+  sut: DbAddAccount,
   encrypterStub: Encrypter
 }
 
