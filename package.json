@@ -5,7 +5,7 @@
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "yarn test:unit && yarn test:functional --passWithNoTests --silent --noStackTrace",
+    "test": "yarn test:unit && yarn test:functional",
     "test:functional": "jest --projects ./test --runInBand",
     "test:unit": "jest --watch",
     "test:staged": "jest",
