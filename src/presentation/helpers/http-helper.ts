@@ -1,4 +1,4 @@
-import { HttpResponse } from '../controllers/protocols/http';
+import { HttpResponse } from '../protocols/http';
 import { ServerError } from '../error';
 
 export const badRequest = (error: Error): HttpResponse => ({
