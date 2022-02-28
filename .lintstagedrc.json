@@ -2,7 +2,7 @@
   "*ts": [
     "yarn lint && yarn lint:fix",
     "yarn style:check && yarn style:fix",
-    "git add"
+    "git add ."
 
   ]
 }
