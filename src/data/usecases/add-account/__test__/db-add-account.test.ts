@@ -7,13 +7,17 @@ interface TypeSut {
   encrypterStub: Encrypter
 }
 
-const makeSut = (): TypeSut => {
-  class EncrypterStub {
-    public encrypt(value: string): Promise<string> {
-      return  new Promise(resolve => resolve('hashed password'))
+const makeEncrypter = (): Encrypter => {
+  class EncrypterStub implements Encrypter {
+    public encrypt ( vallue: string): Promise<string> {
+      return new Promise(resolve => resolve('hashed-password'))
     }
   }
-  const encrypterStub = new EncrypterStub()
+  return new EncrypterStub()
+}
+
+const makeSut = (): TypeSut => {
+  const encrypterStub = makeEncrypter()
   const sut = new DbAddAccount(encrypterStub)
   return {
     sut,
