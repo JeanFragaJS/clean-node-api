@@ -25,8 +25,6 @@ const makeSut = (): TypeSut => {
   }
 }
 
-
-
 describe('DbAddAccount Usecase', ()=> {
   it('Should call Encrypter with correct password', async ()=> {
     const {encrypterStub, sut} = makeSut()
@@ -39,5 +37,21 @@ describe('DbAddAccount Usecase', ()=> {
     }
    await sut.add(accountData)
    expect(encrypterSpy).toHaveBeenCalledWith('valid-password')
+  })
+
+  it('Should throw if Encrypter throw', async ()=> {
+    const {sut, encrypterStub } = makeSut()
+
+    jest.spyOn(encrypterStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject)=>  reject(new Error()) ) )
+
+    const accountData = {
+      name: 'valid-name',
+      email: 'valid-mail',
+      password: 'valid-password'
+    }
+
+    const promise = sut.add(accountData)
+    await expect(promise).rejects.toThrow()
+    //Garanti que o try-catch nao será implementado justamente para o erro ser lançado a diante 
   })
 })
