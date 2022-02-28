@@ -1,10 +1,6 @@
 import {DbAddAccount} from '../db-add-account'
-import { Encrypter } from '../db-add-account-protocols'
+import { Encrypter, AddAccountModel, AccountModel, AddAccountRepository} from '../db-add-account-protocols'
 
-interface TypeSut {
-  sut: DbAddAccount,
-  encrypterStub: Encrypter
-}
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
@@ -15,10 +11,35 @@ const makeEncrypter = (): Encrypter => {
   return new EncrypterStub()
 }
 
-const makeSut = (): TypeSut => {
+
+const makeAddAccountRepository = (): AddAccountRepository => {
+  class AddAccountRepositoryStub implements AddAccountRepository {
+    public async add (accountData: AddAccountModel): Promise<AccountModel>{
+      const fakeAccount = {
+        id: 'valid_id',
+        name: 'valid_name',
+        email: 'valid_email',
+        password: 'hashed_password'
+      }
+
+      return new Promise(resolve => resolve(fakeAccount))
+    }
+  }
+  return new AddAccountRepositoryStub()
+}
+
+interface SutTypes {
+  sut: DbAddAccount,
+  encrypterStub: Encrypter
+  addAccountRepositoryStub: AddAccountRepository
+}
+
+const makeSut = (): SutTypes => {
+  const addAccountRepositoryStub = makeAddAccountRepository()
   const encrypterStub = makeEncrypter()
-  const sut = new DbAddAccount(encrypterStub)
+  const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub)
   return {
+    addAccountRepositoryStub,
     sut,
     encrypterStub
   }
@@ -52,5 +73,24 @@ describe('DbAddAccount Usecase', ()=> {
     const promise = sut.add(accountData)
     await expect(promise).rejects.toThrow()
     //Garanti que o try-catch nao será implementado justamente para o erro ser lançado a diante 
+  })
+
+  it('Should call addAccountRepository with correct values', async ()=> {
+    const {sut, addAccountRepositoryStub } = makeSut()
+    const addSpy =  jest.spyOn(addAccountRepositoryStub, 'add')
+
+    const accountData = { 
+      name: 'valid-name',
+      email: 'valid-mail',
+      password: 'hashed-password'
+    }
+
+
+    const account = await sut.add(accountData)
+    expect(addSpy).toHaveBeenCalledWith({
+      name: 'valid-name',
+      email: 'valid-mail',
+      password: 'hashed-password'
+    })
   })
 })
