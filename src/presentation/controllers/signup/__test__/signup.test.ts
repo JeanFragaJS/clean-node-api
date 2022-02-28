@@ -6,6 +6,7 @@ import {
   ServerError,
 } from '@src/presentation/error';
 
+
 const makeEmailvalidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     public isValid(email: string): boolean {
@@ -231,5 +232,27 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError)
+  })
+
+  it('Should return 200 if valid data is provided to addAccount', async () => {
+    const { sut } =  makeSut()
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email',
+        password: 'valid',
+        passwordConfirm: 'valid',
+      }
+    }
+
+    const httpResponse =  await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual(expect.objectContaining({
+        id: 'valid_id',
+        name: 'valid_name',
+        email: 'valid_email',
+        password: 'valid_password'
+    })
+    )
   })
 });
