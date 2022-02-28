@@ -11,7 +11,9 @@ export class DbAddAccount implements AddAccount {
   }
   
   public async add (account: AddAccountModel): Promise<AccountModel> {
-    this.encrypter.encrypt(account.password)
+    await this.encrypter.encrypt(account.password)
     return new Promise(resolve => resolve(null))
+    //Não vamos colocar o try-catch aqui  justamente para se caso ocorra um erro 
+    //ser lançado a diante
   }
 }
