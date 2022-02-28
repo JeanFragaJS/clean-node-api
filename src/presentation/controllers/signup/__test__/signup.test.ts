@@ -5,6 +5,8 @@ import {
   InvalidParamError,
   ServerError,
 } from '@src/presentation/error';
+import { rejects } from 'assert';
+import { resolve } from 'path/posix';
 
 
 const makeEmailvalidator = (): EmailValidator => {
@@ -18,7 +20,7 @@ const makeEmailvalidator = (): EmailValidator => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    public add (account: AddAccountModel ): AccountModel {
+    public async add (account: AddAccountModel ): Promise<AccountModel> {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
@@ -26,7 +28,7 @@ const makeAddAccount = (): AddAccount => {
         password: 'valid_password'
       }
 
-      return fakeAccount
+      return new Promise(resolve => resolve(fakeAccount))
     }
   }
   return new AddAccountStub() 
@@ -217,8 +219,8 @@ describe('SignUp Controller', () => {
 
   it('Shoul return 500 if addAcount fail', async ()=> {
     const { sut,  addAccountStub } = makeSut()
-    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
-      throw new Error()
+    jest.spyOn(addAccountStub, 'add').mockImplementationOnce( async () => {
+     return  new Promise((resolve, reject)=> reject(new Error))
     })
 
     const httpRequest = {
@@ -229,7 +231,7 @@ describe('SignUp Controller', () => {
         passwordConfirm: 'any',
       }
     }
-    const httpResponse = sut.handle(httpRequest)
+    const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError)
   })
