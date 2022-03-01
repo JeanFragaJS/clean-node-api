@@ -1,5 +1,6 @@
-import bcrypt, { hash } from 'bcrypt'
-import { setDefaultResultOrder } from 'dns'
+
+
+import bcrypt from 'bcrypt'
 import { BcryptAdapter } from './bcrypt-adapter'
 
 jest.mock('bcrypt', () => ({
@@ -29,4 +30,13 @@ describe('Bcrypt Adapter', () => {
     const hashed = await sut.encrypt('any-value')
     expect(hashed).toBe('hashed-value')
   })
+
+  it('Should throw if bcrypt throws ', async ()=> {
+    const sut = makeSut(salt)
+    jest.spyOn(bcrypt, 'hash').mockImplementationOnce( () => { throw new Error })
+    
+    const promise = await sut.encrypt('any-value')
+    expect(promise).rejects.toThrow()
+  })
+
 })
