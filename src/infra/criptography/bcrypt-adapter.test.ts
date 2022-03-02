@@ -35,7 +35,7 @@ describe('Bcrypt Adapter', () => {
     const sut = makeSut(salt)
     jest.spyOn(bcrypt, 'hash').mockImplementationOnce( () => { throw new Error })
     
-    const promise = await sut.encrypt('any-value')
+    const promise =  sut.encrypt('any-value')
     expect(promise).rejects.toThrow()
   })
 

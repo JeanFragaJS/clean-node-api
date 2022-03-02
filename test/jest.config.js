@@ -5,6 +5,7 @@ const rootConfig = require(`${root}/jest.config.js`)
 
 module.exports = {...rootConfig, ...{
   rootDir: root,
+  preset: '@shelf/jest-mongodb',
   displayName: "end2end-functional-tests",
   testMatch: ["<rootDir>/test/**/*.test.ts"],
 //  setupFilesAfterEnv: ["<rootDir>/test/jest-setup.ts"]
