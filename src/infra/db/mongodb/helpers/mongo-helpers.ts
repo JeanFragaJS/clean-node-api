@@ -20,5 +20,10 @@ export const MongoHelper = {
     // operative methods
     // https://docs.mongodb.com/manual/reference/method/
   
-  } 
+  },
+  
+  map: ( collection ): any => {
+    const { _id, ...objectCollection } = collection
+    return Object.assign({}, objectCollection, { id: _id } )
+  }
 }
