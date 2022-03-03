@@ -22,7 +22,7 @@ export const MongoHelper = {
   
   },
   
-  map: ( collection ): any => {
+  map: ( collection: any ): any => {
     const { _id, ...objectCollection } = collection
     return Object.assign({}, objectCollection, { id: _id } )
   }
