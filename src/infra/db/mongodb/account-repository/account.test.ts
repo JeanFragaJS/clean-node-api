@@ -1,5 +1,6 @@
 import { MongoHelper } from '../helpers/mongo-helpers'
 import { AccountMongoRepository } from './account'
+import env from '@src/main/config/env'
 
 const makeSut = (): AccountMongoRepository => {
   return new AccountMongoRepository
@@ -8,7 +9,8 @@ const makeSut = (): AccountMongoRepository => {
 describe('Account Mondo Repository', ()=> {
   
   beforeAll( async ()=> {
-      await MongoHelper.connect('mongodb://127.0.0.1:27017/')
+      await MongoHelper.connect(env.mongoUrl)
+      //mongodb://127.0.0.1:27017/
   })
 
   beforeEach( async () => {
