@@ -19,6 +19,7 @@ export class SignUpController implements Controller {
     this.emailValidator = emailValidator;
     this.addAccount =  addAccount
   }
+
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const { name, email, password, passwordConfirm } = httpRequest.body;
     try {
@@ -44,7 +45,7 @@ export class SignUpController implements Controller {
         email,
         password
       })
-
+   
       return ok(account)  
     } catch (error) {
       //console.log(error)
