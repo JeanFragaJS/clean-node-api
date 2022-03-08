@@ -4,14 +4,15 @@ const root = resolve(__dirname)
 
 module.exports = {
   rootDir: root,
-  displayName: 'root-tests',
+  displayName: 'unit-test',
   testMatch: ['<rootDir>/src/**/*.test.ts'],
   testEnvironment: 'node',
   clearMocks: true,
   preset: 'ts-jest',
   collectCoverageFrom: [
-    '<rootDir>/src/$1',
-    '<rootDir>/test/$1'
+    '<rootDir>/src/**/*.ts',
+    '<rootDir>/test/*.ts',
+    '!<rootDir>/src/main/**'
   ],
   coverageDirectory: 'coverage',
   transform: {

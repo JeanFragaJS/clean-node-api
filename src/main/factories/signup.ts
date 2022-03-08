@@ -6,9 +6,9 @@ import { AccountMongoRepository } from '../../infra/db/mongodb/account-repositor
 
 export const makeSignupController = ():SignUpController => {
   const salt = 12
-  const emailValidatorAdapter = new EmailValidatorAdapter()
+  const emailValidatorAdapter = new EmailValidatorAdapter() //email valitador vai pro signup controller 
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountMongoRepository = new AccountMongoRepository()
-  const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository)
+  const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository) //db add account vai pro signup controller 
   return new SignUpController(emailValidatorAdapter, dbAddAccount)
 }
