@@ -1,11 +1,13 @@
 import {LogControllerDecorator} from '../log'
 import {Controller, HttpRequest, HttpResponse} from '@src/presentation/protocols'
 describe('Logs Controllers Decorator', () => {
-// const makeSut = (): LogControllerDecorator => {
-//   class LogControllerDecorator implements Controller
-// }
 
-  it('Should calls controller handle', async () => {
+  interface SutTypes {
+    sut: LogControllerDecorator,
+    controllerStub: Controller
+  }
+
+  const makeController = (): Controller => {
     class ControllerStub implements Controller {
       async handle (httpRequest: HttpRequest): Promise<HttpResponse>{
         const httpResponse: HttpResponse = {
@@ -17,12 +19,25 @@ describe('Logs Controllers Decorator', () => {
           }
         }
         return new Promise(resolve => resolve(httpResponse))
-     }  
+    }  
     }
-  
-    const controllerStub = new ControllerStub()
+    return new ControllerStub()
+  } 
+
+  const makeSut = (): SutTypes => {
+
+  const controllerStub = makeController()
+  const sut = new LogControllerDecorator(controllerStub)
+  return {
+    sut,
+    controllerStub
+  }
+  }
+
+  it('Should calls controller handle', async () => {
+    const {controllerStub, sut} = makeSut()
     const handleSpy = jest.spyOn (controllerStub, 'handle')
-    const sut = new LogControllerDecorator(controllerStub)
+    
     const httpRequest = {
       body: {
         email: 'any@mail.com',
@@ -35,4 +50,5 @@ describe('Logs Controllers Decorator', () => {
    const decorator = await sut.handle(httpRequest)
     expect(handleSpy).toBeCalledWith(httpRequest)
   })
+  
 })
