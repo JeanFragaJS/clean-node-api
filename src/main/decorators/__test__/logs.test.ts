@@ -13,8 +13,9 @@ describe('Logs Controllers Decorator', () => {
         const httpResponse: HttpResponse = {
           statusCode: 200,
           body: {
-            name: 'any',
-            email: 'any@mail',
+            id: 'any-id',
+            name: 'any-name',
+            email: 'any@mail.com',
             password: 'any-password'
           }
         }
@@ -47,8 +48,29 @@ describe('Logs Controllers Decorator', () => {
       }
     }
 
-   const decorator = await sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(handleSpy).toBeCalledWith(httpRequest)
+  })
+
+  it('Should return dependency httpResponse controller ', async () => {
+    const { sut } =  makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any',
+        email: 'any@mail.com',
+        password: 'any-password',
+        passwordConfirm: 'any-password'
+      }
+    }
+
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual(expect.objectContaining({
+        name: 'any-name',
+        email: 'any@mail.com',
+        password: 'any-password',
+        id: 'any-id'
+    }))
   })
   
 })
