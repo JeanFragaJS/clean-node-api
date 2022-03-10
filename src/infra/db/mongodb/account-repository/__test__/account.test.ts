@@ -1,5 +1,5 @@
-import { MongoHelper } from '../helpers/mongo-helpers'
-import { AccountMongoRepository } from './account'
+import { MongoHelper } from '../../helpers/mongo-helpers'
+import { AccountMongoRepository } from '../account'
 import env from '@src/main/config/env'
 
 const makeSut = (): AccountMongoRepository => {

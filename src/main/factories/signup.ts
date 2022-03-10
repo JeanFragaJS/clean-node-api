@@ -9,6 +9,7 @@ import { LogControllerDecorator } from '../decorators/log'
 
 
 
+
 export const makeSignupController = ():Controller => {
   const salt = 12
   const emailValidatorAdapter = new EmailValidatorAdapter() //email valitador vai pro signup controller 
@@ -16,5 +17,6 @@ export const makeSignupController = ():Controller => {
   const accountMongoRepository = new AccountMongoRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository) //db add account vai pro signup controller 
   const signupController = new SignUpController(emailValidatorAdapter, dbAddAccount)
+
   return new LogControllerDecorator(signupController)
 }
