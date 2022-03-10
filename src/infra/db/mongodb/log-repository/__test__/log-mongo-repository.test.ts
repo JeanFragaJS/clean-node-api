@@ -23,6 +23,6 @@ afterAll( async ()=> {
     const sut = new LogMongoRepository()
     await sut.logError('any-error')
     const countErrors = await errorCollection.countDocuments()
-    expect(countErrors).toBe(0)
+    expect(countErrors).toBe(1)
   })
 })
