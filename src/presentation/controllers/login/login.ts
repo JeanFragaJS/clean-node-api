@@ -4,7 +4,15 @@ import {badRequest} from '../../helpers/http-helper'
 
 export class LoginController implements Controller{
   public async handle  (httpRequest: HttpRequest): Promise<HttpResponse> {
-    return new Promise(resolve => resolve(badRequest(new MissingParamError('email'))))
+    const  fields = ['password', 'email']
+    for (const field of fields) {
+      if (!httpRequest.body[field]) {
+        return badRequest(new MissingParamError(field))
+      }
+    }
+
+    return new Promise(resolve => resolve(null))
+    
   }
 
 }
