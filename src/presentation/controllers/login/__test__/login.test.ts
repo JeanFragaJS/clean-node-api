@@ -4,19 +4,19 @@ import { badRequest, Controller, HttpRequest, HttpResponse } from '../login-prot
 
 describe('SignIn Controller', () => {
 
-  // interface SutTypes {
-  //   sut: LoginController
-  // }
+  interface SutTypes {
+    sut: LoginController
+  }
 
-  // const makeSut = (): SutTypes => {
-  //   const sut = new LoginController()
-  //   return {
-  //     sut 
-  //   }
-  // }
+  const makeSut = (): SutTypes => {
+    const sut = new LoginController()
+    return {
+      sut 
+    }
+  }
 
   it('Should return 400 if email is not provided', async () => {
-    const sut = new LoginController()
+    const{  sut } = makeSut()
     const httpRequest = {
       body: {
         password: 'any-password'
@@ -27,7 +27,7 @@ describe('SignIn Controller', () => {
   })
 
   it('Should returns 400 if password is not provided', async () => {
-    const sut =  new LoginController() //makeSut()
+    const { sut } = makeSut()
     const httpRequest = {
       body: {
         email: 'any@mail.com'
