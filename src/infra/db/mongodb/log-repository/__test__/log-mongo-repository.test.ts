@@ -6,14 +6,14 @@ import { LogMongoRepository } from '../log-mongo-repository'
 describe('Log Mongo Repository', () => {
   let errorCollection: Collection
 
-  beforeAll( async ()=> {
-    await MongoHelper.connect(env.mongoUrl)
-    //mongodb://127.0.0.1:27017/
+beforeAll( async ()=> {
+  await MongoHelper.connect(env.mongoUrl)
+  //mongodb://127.0.0.1:27017/
 })
 
 beforeEach( async () => {
   errorCollection = await MongoHelper.getCollection('errors')
-  errorCollection.deleteMany({})
+  await errorCollection.deleteMany({})
 })
 
 afterAll( async ()=> {
