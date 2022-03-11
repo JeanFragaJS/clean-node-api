@@ -8,6 +8,12 @@ describe('SignIn Controller', () => {
     sut: LoginController
     emailValidatorStub: EmailValidator
   }
+  const makehttpRequest = (): HttpRequest => ({
+    body: {
+      email: 'any@mail.com',
+      password: 'any-password'
+    }
+  })
 
   const makeEmailvalidatorStub = (): EmailValidator => {
     class EmailValidatorStub implements  EmailValidator {
@@ -53,28 +59,17 @@ describe('SignIn Controller', () => {
   it('Should calls emailValidator with correct values', async () => {
     const { sut, emailValidatorStub } = makeSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
-    const httpRequest = {
-      body: {
-        email: 'any@mail.com',
-        password: 'any-password'
-      }
-    }
 
-    await sut.handle(httpRequest)
+    await sut.handle(makehttpRequest())
     expect(isValidSpy).toBeCalledWith('any@mail.com')
   })
 
   it('', async () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
-    const httpRequest = {
-      body: {
-        email: 'any@mail.com',
-        password: 'any-password'
-      }
-    }
+   
 
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(makehttpRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
   })
 })
