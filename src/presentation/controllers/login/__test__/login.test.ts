@@ -2,6 +2,7 @@ import { InvalidParamError, MissingParamError } from '@src/presentation/error'
 import { LoginController } from '../login'
 import { badRequest, unauthorized, EmailValidator, HttpRequest, serverError, ok } from '../login-protocols'
 import { Authentication} from '@src/domain/usecases/authentication'
+
 describe('SignIn Controller', () => {
 
   interface SutTypes {
