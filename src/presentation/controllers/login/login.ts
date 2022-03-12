@@ -21,12 +21,13 @@ export class LoginController implements Controller{
       }
     }
     // check the email is valid
-    const isValidEmail = this.emailValidator.isValid(httpRequest.body.email)
+    const { email, password } = httpRequest.body
+    const isValidEmail = this.emailValidator.isValid(email)
     if (!isValidEmail) {
       return badRequest(new InvalidParamError('email'))
     }
 
-    const accessToken = await this.authentication.auth(httpRequest.body.email, httpRequest.body.password)
+    const accessToken = await this.authentication.auth(email, password)
     if (!accessToken) {
       return unauthorized() 
     }
