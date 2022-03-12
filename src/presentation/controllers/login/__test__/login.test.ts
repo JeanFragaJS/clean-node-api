@@ -11,7 +11,7 @@ describe('SignIn Controller', () => {
   }
 
 
-  const makehttpRequest = (): HttpRequest => ({
+  const makeHttpRequest = (): HttpRequest => ({
     body: {
       email: 'any@mail.com',
       password: 'any-password'
@@ -75,7 +75,7 @@ describe('SignIn Controller', () => {
     const { sut, emailValidatorStub } = makeSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
 
-    await sut.handle(makehttpRequest())
+    await sut.handle(makeHttpRequest())
     expect(isValidSpy).toBeCalledWith('any@mail.com')
   })
 
@@ -84,7 +84,7 @@ describe('SignIn Controller', () => {
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
    
 
-    const httpResponse = await sut.handle(makehttpRequest())
+    const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
   })
 
@@ -94,7 +94,7 @@ describe('SignIn Controller', () => {
       throw new Error()
     })
 
-    const httpResponse = await sut.handle(makehttpRequest())
+    const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(serverError(new Error)) 
   })
 
@@ -102,7 +102,7 @@ describe('SignIn Controller', () => {
     const { sut, authenticationStub } = makeSut()
     const authspy = jest.spyOn(authenticationStub, 'auth')
 
-    await sut.handle(makehttpRequest())
+    await sut.handle(makeHttpRequest())
     expect(authspy).toHaveBeenCalledWith('any@mail.com', 'any-password')
   })
 
@@ -110,7 +110,7 @@ describe('SignIn Controller', () => {
     const { sut, authenticationStub } = makeSut()
     jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce( new Promise(resolve => resolve(null))) 
 
-   const httpResponse = await sut.handle(makehttpRequest())
+   const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(unauthorized())
   })
 
@@ -118,13 +118,13 @@ describe('SignIn Controller', () => {
     const { sut, authenticationStub } = makeSut()
     jest.spyOn( authenticationStub, 'auth').mockReturnValueOnce(new Promise( (resolve,reject) => reject(new Error()) ) )
 
-    const httpResponse = await sut.handle(makehttpRequest())
+    const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   it('Should returns 200 if valid credentials are provided', async () => {
     const { sut } = makeSut()
-    const httpResponse = await sut.handle(makehttpRequest())
+    const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual( ok({ accessToken: 'any-token' }))
   })
 })
