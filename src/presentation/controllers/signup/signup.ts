@@ -5,26 +5,31 @@ import {
   HttpResponse,
   Controller,
   EmailValidator,
-  AddAccount
+  AddAccount,
+  Validation
 } from './signup-protocols';
 
 export class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator;
   private readonly addAccount: AddAccount
+  private readonly validation: Validation
 
   constructor(
     emailValidator: EmailValidator, 
-    addAccount: AddAccount
+    addAccount: AddAccount,
+    validation: Validation
     ) {
     this.emailValidator = emailValidator;
     this.addAccount =  addAccount
+    this.validation = validation
   }
 
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const { name, email, password, passwordConfirm } = httpRequest.body;
     
     try {
-    
+      this.validation.validate(httpRequest.body)
+
       const requiredFields = ['name', 'email', 'password', 'passwordConfirm'];
       for (const field of requiredFields) {
         if (!httpRequest.body[field]) {
