@@ -14,11 +14,7 @@ export class SignUpController implements Controller {
   private readonly addAccount: AddAccount
   private readonly validation: Validation
 
-  constructor(
-    emailValidator: EmailValidator, 
-    addAccount: AddAccount,
-    validation: Validation
-    ) {
+  constructor( emailValidator: EmailValidator, addAccount: AddAccount, validation: Validation) {
     this.emailValidator = emailValidator;
     this.addAccount =  addAccount
     this.validation = validation

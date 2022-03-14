@@ -5,11 +5,8 @@ import { BcryptAdapter } from '../../infra/criptography/bcrypt-adapter'
 import { LogMongoRepository } from '../../infra/db/mongodb/log-repository/log-mongo-repository'
 import { AccountMongoRepository } from '../../infra/db/mongodb/account-repository/account'
 import { Controller} from '../../presentation/protocols'
-import { ValidationComposite } from '@src/main/validations/validations-composite'
 import { LogControllerDecorator } from '../decorators/logs-decorator'
-
-
-
+import { makeSignUpValidation } from './signUp-validation'
 
 
 
@@ -19,8 +16,7 @@ export const makeSignupController = ():Controller => {
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountMongoRepository = new AccountMongoRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository) //db add account vai pro signup controller 
-  const validationComposite = new ValidationComposite()
-  const signupController = new SignUpController(emailValidatorAdapter, dbAddAccount, validationComposite)
+  const signupController = new SignUpController(emailValidatorAdapter, dbAddAccount, makeSignUpValidation())
   const logMongoRepository = new LogMongoRepository()
   return new LogControllerDecorator(signupController, logMongoRepository)
 }
