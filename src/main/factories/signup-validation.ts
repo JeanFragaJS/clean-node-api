@@ -3,7 +3,7 @@ import { CompareFieldsValidation } from '@src/presentation/helpers/validators/co
 import { EmailValidation } from '@src/presentation/helpers/validators/emailValidation'
 import { RequireFieldsValidation } from '@src/presentation/helpers/validators/requireFieldsValidation'
 import { Validation } from '@src/presentation/helpers/validators/validation'
-import { ValidationComposite } from '@src/presentation/helpers/validators/validations-composite'
+import { ValidationComposite } from '@src/presentation/helpers/validators/validationsComposite'
 import { EmailValidatorAdapter } from '@src/util/email-validator-adapapter'
 
 

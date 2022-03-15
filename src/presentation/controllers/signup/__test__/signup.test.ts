@@ -1,20 +1,12 @@
 import { SignUpController } from '../signup'
-import { AddAccount, AddAccountModel, AccountModel, EmailValidator, HttpRequest, Validation} from '../signup-protocols'
-import { MissingParamError,InvalidParamError, ServerError,} from '@src/presentation/error'
+import { AddAccount, AddAccountModel, AccountModel, EmailValidator, HttpRequest} from '../signup-protocols'
+import { InvalidParamError, ServerError,} from '@src/presentation/error'
 import {ok, serverError, badRequest} from '@src/presentation/helpers/http-helper'
 
 import { makeSignUpValidation } from "@src/main/factories/signUp-validation"
 
 jest.mock('@src/presentation/helpers/validators/validations-composite')
 
-const makeEmailvalidatorStub = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    public isValid(email: string): boolean {
-      return true;
-    }
-  }
-  return new EmailValidatorStub();
-};
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
