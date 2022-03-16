@@ -16,7 +16,9 @@ export class LoginController implements Controller{
     try{
 
       const error = this.validation.validate(httpRequest.body)
-      
+      if( error ) {
+        return badRequest( error )
+      }
       // chek if the user is authorized
       const { email, password } = httpRequest.body
       const accessToken = await this.authentication.auth(email, password)
