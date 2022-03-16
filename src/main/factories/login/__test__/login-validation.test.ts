@@ -1,0 +1,34 @@
+import { RequireFieldsValidation } from "@src/presentation/helpers/validators/requireFieldsValidation"
+import { Validation } from "@src/presentation/helpers/validators/validation"
+import { ValidationComposite } from "@src/presentation/helpers/validators/validationsComposite"
+import { EmailValidation } from "@src/presentation/helpers/validators/emailValidation"
+import { EmailValidator } from "@src/presentation/protocols"
+
+import { makeLoginValidation } from "../login-validation"
+
+jest.mock('@src/presentation/helpers/validators/validationsComposite.ts')
+
+const makeEmailvalidator = (): EmailValidator => {
+  class EmailValidatorStub implements EmailValidator {
+    public isValid(email: string): boolean {
+      return true;
+    }
+  }
+  return new EmailValidatorStub();
+};
+
+
+describe('Login Validation', ()=> {
+  it('Should call ValidationComposite with all Validation', () => {
+    makeLoginValidation()
+    const emailValidatorStub = makeEmailvalidator()
+    const validations: Validation[] = []
+
+    for (const field of [ 'email','password', ]) {
+      validations.push(new RequireFieldsValidation(field))
+    }
+    validations.push(new EmailValidation('email', emailValidatorStub))
+
+    expect(ValidationComposite).toHaveBeenCalledWith(validations)
+  })
+})
