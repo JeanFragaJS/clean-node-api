@@ -1,11 +1,10 @@
 import { SignUpController } from '../signup'
-import { AddAccount, AddAccountModel, AccountModel, EmailValidator, HttpRequest} from '../signup-protocols'
-import { InvalidParamError, ServerError,} from '@src/presentation/error'
+import { AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation} from '../signup-protocols'
+import { ServerError,} from '@src/presentation/error'
 import {ok, serverError, badRequest} from '@src/presentation/helpers/http-helper'
-
 import { makeSignUpValidation } from "@src/main/factories/signUp-validation"
 
-jest.mock('@src/presentation/helpers/validators/validations-composite')
+jest.mock('@src/presentation/helpers/validators/validationsComposite.ts')
 
 
 const makeAddAccount = (): AddAccount => {
@@ -16,6 +15,15 @@ const makeAddAccount = (): AddAccount => {
     }
   }
   return new AddAccountStub() 
+}
+
+const makeValidation = (): Validation => {
+  class ValidationStub implements Validation {
+    public validate (input: any): Error {
+      return null
+    }
+  }
+  return new ValidationStub()
 }
 
 const makeFakeAccount = (): AccountModel => ({
@@ -37,35 +45,23 @@ const makeFakeRequest = (): HttpRequest => ({
 interface SutTypes {
   sut: SignUpController;
   addAccountStub: AddAccount
+  validationStub: Validation
   
 }
 
 const makeSut = (): SutTypes => {
+  const validationStub = makeValidation()
   const addAccountStub = makeAddAccount();
-  const sut = new SignUpController( addAccountStub,  makeSignUpValidation());
+  const sut = new SignUpController( addAccountStub, validationStub); // makeSignUpValidation()
   return {
     sut,
     addAccountStub,
+    validationStub
   };
 };
 
 describe('SignUp Controller', () => {
 
-  it('Should return 400 if passwordConfirm fail', async () => {
-    const { sut } = makeSut();
-    const httpRequest = {
-      body: {
-        name: 'any-name',
-        email: 'any@any.com',
-        password: 'any',
-        passwordConfirm: 'invalidPasswordconfirm'
-      },
-    };
-
-    const httpResponse = await sut.handle(httpRequest);
-    expect(httpResponse).toEqual(badRequest( new InvalidParamError('passwordConfirm')));
-   
-  });
 
   it('Shoud call addAcount with correct values', async ()=> {
     const {sut, addAccountStub} = makeSut();
@@ -96,5 +92,14 @@ describe('SignUp Controller', () => {
     const httpResponse =  await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok(makeFakeAccount()))
   })
+
+  it('should call Validation with correct values', async () => {
+    const { sut, validationStub } = makeSut()
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(httpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
+
 
 });
