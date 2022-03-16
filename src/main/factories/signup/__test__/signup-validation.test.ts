@@ -5,9 +5,9 @@ import { ValidationComposite } from "@src/presentation/helpers/validators/valida
 import { EmailValidation } from "@src/presentation/helpers/validators/emailValidation"
 import { EmailValidator } from "@src/presentation/protocols"
 
-import { makeSignUpValidation } from "../signUp-validation"
+import { makeSignUpValidation } from "../signup-validation"
 
-jest.mock('@src/presentation/helpers/validators/validations-composite')
+jest.mock('@src/presentation/helpers/validators/validationsComposite.ts')
 
 const makeEmailvalidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {

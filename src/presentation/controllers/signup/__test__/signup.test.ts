@@ -2,7 +2,6 @@ import { SignUpController } from '../signup'
 import { AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation} from '../signup-protocols'
 import { MissingParamError, ServerError,} from '@src/presentation/error'
 import {ok, serverError, badRequest} from '@src/presentation/helpers/http-helper'
-import { makeSignUpValidation } from "@src/main/factories/signUp-validation"
 
 jest.mock('@src/presentation/helpers/validators/validationsComposite.ts')
 
