@@ -22,7 +22,10 @@ export class SignUpController implements Controller {
     const { name, email, password, passwordConfirm } = httpRequest.body;
     
     try {
-      this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(httpRequest.body)
+      if (error) {
+        return badRequest(error)
+      }
 
       const account = await this.addAccount.add({
         name,
