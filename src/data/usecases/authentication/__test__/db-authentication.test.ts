@@ -1,6 +1,7 @@
 import { AccountModel } from "../../add-account/db-add-account-protocols"
 import {AuthenticationModel} from '@src/domain/usecases/authentication'
 import { LoadAccountByEmailRepository } from "@src/data/protocols/db/load-account-by-email-repositroty"
+import { HashCompare} from '@src/data/protocols/cryptography/hash-compare'
 import { DbAuthentication } from "../db-authentication"
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
@@ -12,11 +13,20 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   return new LoadAccountByEmailRepositoryStub()
 }
 
+const makeHashCompare = (): HashCompare => {
+  class HashCompareStub implements HashCompare {
+    public  compare (value: string, hash: string): boolean {
+      return true
+    }
+  }
+ return new HashCompareStub()
+}
+
 const makeAccountModel = (): AccountModel => ({
   id: 'any-id',
   name: 'any-name',
   email: 'any@mail.coom',
-  password: 'any-password'
+  password: 'any-hashed-password'
 })
 
 const makeAuthenticationModel = (): AuthenticationModel => ({
@@ -26,14 +36,18 @@ const makeAuthenticationModel = (): AuthenticationModel => ({
 
 interface SutTypes {
   sut: DbAuthentication
+  hashCompareStub: HashCompare
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
+
 }
 
 const makeSut = (): SutTypes => {
+  const hashCompareStub = makeHashCompare()
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository()
- const sut = new DbAuthentication(loadAccountByEmailRepositoryStub)
+ const sut = new DbAuthentication(loadAccountByEmailRepositoryStub, hashCompareStub)
  return {
   sut,
+  hashCompareStub,
   loadAccountByEmailRepositoryStub
  }
 
@@ -67,4 +81,14 @@ describe('DbAuthentication UseCase', ()=> {
     const promise = await sut.auth(makeAuthenticationModel())
     expect(promise).toBeNull()
   })
+
+  it('Should calls HashCompare with correct value', async () => {
+    const { sut, hashCompareStub } = makeSut()
+    const compareSpy = jest.spyOn(hashCompareStub, 'compare')
+
+    await sut.auth(makeAuthenticationModel())
+    expect(compareSpy).toHaveBeenCalledWith(makeAuthenticationModel().password, makeAccountModel().password)
+  })
+
+  
 })
