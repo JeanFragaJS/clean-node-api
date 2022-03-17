@@ -15,8 +15,8 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 
 const makeHashCompare = (): HashCompare => {
   class HashCompareStub implements HashCompare {
-    public  compare (value: string, hash: string): boolean {
-      return true
+    public async compare (value: string, hash: string): Promise<boolean> {
+      return new Promise(resolve => resolve(true))
     }
   }
  return new HashCompareStub()
