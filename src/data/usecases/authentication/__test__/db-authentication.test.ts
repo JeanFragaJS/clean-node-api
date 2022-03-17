@@ -1,11 +1,14 @@
-import { AccountModel } from "../../add-account/db-add-account-protocols"
-import { UpdateAccessTokenRepository } from "@src/data/protocols/db/update-access-token"
-import {AuthenticationModel} from '@src/domain/usecases/authentication'
-import { LoadAccountByEmailRepository } from "@src/data/protocols/db/load-account-by-email-repositroty"
-import { HashCompare} from '@src/data/protocols/cryptography/hash-compare'
-import { TokenGenerator } from '@src/data/protocols/cryptography/token-generator'
-
 import { DbAuthentication } from "../db-authentication"
+import { AccountModel } from "../../add-account/db-add-account-protocols"
+import { 
+  AuthenticationModel, 
+  LoadAccountByEmailRepository, 
+  HashCompare, 
+  UpdateAccessTokenRepository, 
+  TokenGenerator 
+} from "@src/data/usecases/authentication/db-authentication-protocols";
+
+
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
@@ -165,7 +168,7 @@ describe('DbAuthentication UseCase', ()=> {
   })
   
 
-  it('Should calls UpdateAccessToken with correct values', async () => {
+  it('Should calls UpdateAccessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } =makeSut()
     const updateSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'update')
 
@@ -173,5 +176,13 @@ describe('DbAuthentication UseCase', ()=> {
     expect(updateSpy).toHaveBeenCalledWith('any-id', 'any-token')
   })
 
+  it('Should throws if UpdateAccessTokenRepository throws', async () => {
+    const {sut , updateAccessTokenRepositoryStub } = makeSut()
+    jest.spyOn(updateAccessTokenRepositoryStub, 'update').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const promise = sut.auth(makeAuthenticationModel())
+    expect(promise).rejects.toThrow()
+  })
   
 })
