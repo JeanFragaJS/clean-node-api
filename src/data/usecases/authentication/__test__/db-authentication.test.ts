@@ -145,5 +145,11 @@ describe('DbAuthentication UseCase', ()=> {
     const promise = await sut.auth(makeAuthenticationModel())
     expect(promise).toBeNull()
   })
+
+  it('Should returns accessToken with id', async () => {
+    const { sut }= makeSut()
+    const promise = await sut.auth(makeAuthenticationModel())
+    expect(promise).toEqual('any-token')
+  })
   
 })
