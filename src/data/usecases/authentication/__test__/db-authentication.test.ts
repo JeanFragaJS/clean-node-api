@@ -114,6 +114,14 @@ describe('DbAuthentication UseCase', ()=> {
     expect(promise).rejects.toThrow()
   })
 
+  it('Should returns null if HashCompare returns null', async () => {
+    const { sut,  hashCompareStub} = makeSut()
+    jest.spyOn(hashCompareStub, 'compare').mockReturnValueOnce(null)
+
+    const promise = await sut.auth(makeAuthenticationModel())
+    expect(promise).toBeNull()
+  })
+
   it('Should calls TokenGenerator with correct value', async () => {
     const { sut, tokenGeneratorStub} = makeSut()
     const gerenateSpy = jest.spyOn(tokenGeneratorStub, 'generate')
