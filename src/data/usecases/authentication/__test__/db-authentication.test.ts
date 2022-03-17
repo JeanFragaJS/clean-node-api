@@ -129,5 +129,13 @@ describe('DbAuthentication UseCase', ()=> {
     const promise = sut.auth(makeAuthenticationModel())
     expect(promise).rejects.toThrow()
   })
+
+  it('Should returns null if TokenGenerator returns null', async () => {
+    const { sut,  tokenGeneratorStub} = makeSut()
+    jest.spyOn(tokenGeneratorStub, 'generate').mockReturnValueOnce(null)
+
+    const promise = await sut.auth(makeAuthenticationModel())
+    expect(promise).toBeNull()
+  })
   
 })
