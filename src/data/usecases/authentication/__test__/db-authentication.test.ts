@@ -1,8 +1,7 @@
 import { AccountModel } from "../../add-account/db-add-account-protocols"
 import {AuthenticationModel} from '@src/domain/usecases/authentication'
-import { LoadAccountByEmailRepository } from "@src/data/protocols/load-account-by-email-repositroty"
+import { LoadAccountByEmailRepository } from "@src/data/protocols/db/load-account-by-email-repositroty"
 import { DbAuthentication } from "../db-authentication"
-import { rejects } from "assert"
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
