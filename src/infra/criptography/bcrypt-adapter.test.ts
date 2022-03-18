@@ -42,10 +42,16 @@ describe('Bcrypt Adapter', () => {
   })
 
   it('Should call bcrypt compare  with correct values', async () => {
-    const sut= makeSut(salt)
+    const sut = makeSut(salt)
     const compareSpy = jest.spyOn(bcrypt, 'compare')
      await sut.compare('any-value', 'hashed-value')
     expect(compareSpy).toHaveBeenCalledWith('any-value', 'hashed-value') 
+  })
+
+  it('Should return true when bcrypt compare is successed', async () => {
+    const sut = makeSut(salt)
+    const isValid = await sut.compare('any-value', 'hashed-value')
+    expect(isValid).toBe(true)
   })
 
 })
