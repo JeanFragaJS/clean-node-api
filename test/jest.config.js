@@ -19,3 +19,4 @@ module.exports = {...rootConfig, ...{
 //   estrutura de teste no ambiente, mas antes do próprio 
 //   código de teste.
  }}
+  
