@@ -1,12 +1,15 @@
 import { MongoHelper } from '../../helpers/mongo-helpers'
 import { AccountMongoRepository } from '../account'
 import env from '@src/main/config/env'
+import { Collection } from 'mongodb'
 
 const makeSut = (): AccountMongoRepository => {
   return new AccountMongoRepository
 }
 
-describe('Account Mondo Repository', ()=> {
+describe('Account Mongo Repository', ()=> {
+
+  let accountCollection: Collection
   
   beforeAll( async ()=> {
       await MongoHelper.connect(env.mongoUrl)
@@ -14,7 +17,7 @@ describe('Account Mondo Repository', ()=> {
   })
 
   beforeEach( async () => {
-    const accountCollection = await MongoHelper.getCollection('accounts')
+    accountCollection = await MongoHelper.getCollection('accounts')
     accountCollection.deleteMany({})
   })
 
@@ -22,11 +25,11 @@ describe('Account Mondo Repository', ()=> {
     await MongoHelper.disconnect()
   })
 
-  it('Should return an account on success', async () => {
+  it('Should return an account on add success', async () => {
     const sut = makeSut()
     const dataFake = {
       name: 'any-name',
-      email: 'any@mail',
+      email: 'any@mail.com',
       password: 'any-password'
     }
     const account = await sut.add(dataFake)
@@ -34,8 +37,28 @@ describe('Account Mondo Repository', ()=> {
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any-name')
-    expect(account.email).toBe('any@mail')
+    expect(account.email).toBe('any@mail.com')
     expect(account.password).toBe('any-password')
 
   })
+
+  it('Should return an account on loadByEmail success', async () => {
+    const sut = makeSut()
+    accountCollection.insertOne( {
+      name: 'any-name',
+      email: 'any@mail.com',
+      password: 'any-password'
+    })
+
+    const account = await sut.loadByEmail('any@mail.com')
+  
+    expect(account).toBeTruthy()
+    expect(account.id).toBeTruthy()
+    expect(account.name).toBe('any-name')
+    expect(account.email).toBe('any@mail.com')
+    expect(account.password).toBe('any-password')
+
+  })
+
+
 })
