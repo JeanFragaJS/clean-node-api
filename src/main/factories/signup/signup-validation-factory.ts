@@ -6,7 +6,7 @@ import {
   ValidationComposite
 } from '@src/presentation/helpers/validators'
 import { Validation } from '@src/presentation/protocols/validation'
-import { EmailValidatorAdapter } from '@src/util/email-validator-adapapter'
+import { EmailValidatorAdapter } from '@src/main/adapters/validator/email-validator-adapapter'
 
 
 

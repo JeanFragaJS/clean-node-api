@@ -2,17 +2,13 @@ import { Controller, HttpRequest, HttpResponse } from "@src/presentation/protoco
 import { LogErrorRepository } from "@src/data/protocols/db/log/log-error-repository"
 
 export class LogControllerDecorator implements Controller { 
-  private readonly controller: Controller
-  private readonly logErrorRepository: LogErrorRepository 
+
   //A class a ser decorada deve ser do mesmo tipo que vc está 
   //implementando ou herdando
   constructor (
-    controller: Controller, 
-    logErrorRepository: LogErrorRepository
-    ) {
-    this.controller = controller
-    this.logErrorRepository = logErrorRepository
-  }
+    private readonly controller: Controller, 
+    private readonly logErrorRepository: LogErrorRepository
+    ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     const httpResponse = await this.controller.handle(httpRequest)
