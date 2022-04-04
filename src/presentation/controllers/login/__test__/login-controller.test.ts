@@ -1,6 +1,6 @@
 import { MissingParamError } from '@src/presentation/error'
-import { LoginController } from '../login'
-import { badRequest, unauthorized, HttpRequest, serverError, ok, Validation } from '../login-protocols'
+import { LoginController } from '../login-controller'
+import { badRequest, unauthorized, HttpRequest, serverError, ok, Validation } from '../login-controller-protocols'
 import { Authentication, AuthenticationModel} from '@src/domain/usecases/authentication'
 
 

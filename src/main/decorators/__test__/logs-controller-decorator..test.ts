@@ -1,7 +1,7 @@
-import {LogControllerDecorator} from '../logs-decorator'
+import {LogControllerDecorator} from '../logs-controller-decorator'
 import {Controller, HttpRequest, HttpResponse} from '@src/presentation/protocols'
 import { serverError } from '@src/presentation/helpers/http/http-helper'
-import { LogErrorRepository } from '@src/data/protocols/db/log-error-repository'
+import { LogErrorRepository } from '@src/data/protocols/db/log/log-error-repository'
 
 describe('Logs Controllers Decorator', () => {
 
