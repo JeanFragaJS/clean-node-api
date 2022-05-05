@@ -1,5 +1,5 @@
 import { DbAuthentication } from "../db-authentication"
-import { AccountModel } from "../../add-account/db-add-account-protocols"
+import { AccountModel } from "../../db-add-account/db-add-account-protocols"
 import { 
   AuthenticationModel, 
   LoadAccountByEmailRepository, 
