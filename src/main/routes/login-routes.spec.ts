@@ -52,6 +52,16 @@ afterAll( async ()=> {
         })
         expect(response.statusCode).toBe(200)
     })  
+
+    it('Should return 401 on login', async () => {
+      await request(app)
+        .post('/api/login')
+        .send({
+          email: 'jean@gmail.com',
+          password: '12345'
+        })
+        .expect(401)
+    })
   })
   
 })
