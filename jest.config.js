@@ -12,7 +12,7 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '<rootDir>/test/*.ts',
-    '!<rootDir>/src/main/**'
+    '<rootDir>/src/main/*.ts'
   ],
   coverageDirectory: 'coverage',
   transform: {
@@ -20,7 +20,6 @@ module.exports = {
   },
   moduleNameMapper: {
     '@src/(.*)': '<rootDir>/src/$1',
-    '@test/(.*)': '<rootDir>/test/$1'
   }
 
 }
