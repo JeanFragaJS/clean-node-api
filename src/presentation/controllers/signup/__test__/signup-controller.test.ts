@@ -1,9 +1,9 @@
 import { SignUpController } from '../signup-controller'
 import { AddAccount, AddAccountModel, AccountModel, HttpRequest, Validation} from '../signup-controller-protocols'
-import { MissingParamError, ServerError,} from '@src/presentation/error'
-import {ok, serverError, badRequest} from '@src/presentation/helpers/http/http-helper'
+import { MissingParamError, ServerError,} from '@/presentation/error'
+import {ok, serverError, badRequest} from '@/presentation/helpers/http/http-helper'
 
-jest.mock('@src/presentation/helpers/validators/validationsComposite.ts')
+jest.mock('@/presentation/helpers/validators/validationsComposite.ts')
 
 
 const makeAddAccount = (): AddAccount => {

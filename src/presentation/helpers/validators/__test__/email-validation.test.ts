@@ -1,4 +1,4 @@
-import { EmailValidator } from "@src/presentation/protocols";
+import { EmailValidator } from "@/presentation/protocols";
 import { EmailValidation } from "../emailValidation";
 
   const makeEmailvalidator = (): EmailValidator => {

@@ -1,4 +1,4 @@
-import { MissingParamError } from "@src/presentation/error"
+import { MissingParamError } from "@/presentation/error"
 import { Validation } from "../../../protocols/validation"
 import { ValidationComposite } from "../validationsComposite"
 

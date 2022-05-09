@@ -1,5 +1,5 @@
 import {MongoHelper} from '../../helpers/mongo-helpers'
-import env from '@src/main/config/env'
+import env from '@/main/config/env'
 import { Collection } from 'mongodb'
 import { LogMongoRepository } from '../log-mongo-repository'
 

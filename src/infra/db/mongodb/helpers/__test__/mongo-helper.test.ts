@@ -1,5 +1,5 @@
 import {MongoHelper as sut} from '../mongo-helpers'
-import env from '@src/main/config/env'
+import env from '@/main/config/env'
 
 describe('Mongo Helper', () => {
   beforeAll(async () => {

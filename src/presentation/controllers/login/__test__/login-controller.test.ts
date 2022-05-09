@@ -1,7 +1,7 @@
-import { MissingParamError } from '@src/presentation/error'
+import { MissingParamError } from '@/presentation/error'
 import { LoginController } from '../login-controller'
 import { badRequest, unauthorized, HttpRequest, serverError, ok, Validation } from '../login-controller-protocols'
-import { Authentication, AuthenticationModel} from '@src/domain/usecases/authentication'
+import { Authentication, AuthenticationModel} from '@/domain/usecases/authentication'
 
 
 const makeHttpRequest = (): HttpRequest => ({

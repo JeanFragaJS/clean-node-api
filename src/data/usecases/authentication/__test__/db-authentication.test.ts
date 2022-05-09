@@ -6,7 +6,7 @@ import {
   HashCompare, 
   UpdateAccessTokenRepository, 
   Encrypter 
-} from "@src/data/usecases/authentication/db-authentication-protocols";
+} from "@/data/usecases/authentication/db-authentication-protocols";
 
 
 

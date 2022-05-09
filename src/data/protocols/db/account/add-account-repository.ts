@@ -1,5 +1,5 @@
-import { AddAccount, AddAccountModel } from "@src/domain/usecases/add-account";
-import { AccountModel } from '@src/domain/models/account'
+import { AddAccount, AddAccountModel } from "@/domain/usecases/add-account";
+import { AccountModel } from '@/domain/models/account'
 
 
 export class AddAccountRepository implements AddAccount  {
