@@ -1,6 +1,6 @@
 {
   "*ts": [
-    "prettier --write 'src/**' --fix",
+    "eslint 'src/**' --fix",
     "git add ."
   ]
 }

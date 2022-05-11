@@ -1,9 +1,10 @@
 {
   "name": "clean-node-api",
   "version": "1.1.0",
-  "main": "dist/main/server.js",
+  "main": "server.js",
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
+  
 
   "scripts": {
     "start": "node dist/main/server.js",

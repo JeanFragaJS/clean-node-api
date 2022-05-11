@@ -1,9 +1,9 @@
-import request from 'supertest';
-import app from '@/main/config/app';
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helpers';
-import env from '../config/env';
-import { Collection } from 'mongodb';
-import { hash } from 'bcrypt';
+import request from 'supertest'
+import app from '@/main/config/app'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helpers'
+import env from '../config/env'
+import { Collection } from 'mongodb'
+import { hash } from 'bcrypt'
 
 let accountCollection: Collection;
 
@@ -54,9 +54,9 @@ describe('Login Routes', () => {
         .post('/api/login')
         .send({
           email: 'jean@gmail.com',
-          password: '12345',
+          password: '12345'
         })
-        .expect(401);
+        .expect(401)
     });
   });
 });

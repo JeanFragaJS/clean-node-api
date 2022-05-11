@@ -1,18 +1,12 @@
 { 
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "ES2019",
     "module": "CommonJS",
     "outDir": "dist",
-    "lib": [
-      "ESNext",
-      "ES2021"
-    ],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "sourceMap":true,
-    "strict": true,
-    "strictNullChecks": true,
     "traceResolution": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -32,11 +26,10 @@
     ]
   },
   "include": [
-    "./src/**/*",
+    "./src/**/*"
   ],
-
   "exclude": [
-    "./node_modules/*",
+    "node_modules",
     "dist"
   ]
 
