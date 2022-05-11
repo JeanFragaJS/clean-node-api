@@ -1,13 +1,13 @@
-import { 
-  CompareFieldsValidation, 
-  RequireFieldsValidation, 
-  ValidationComposite, 
-  EmailValidation 
-} from "@/presentation/helpers/validators"
-import { EmailValidator, Validation } from "@/presentation/protocols"
-import { makeSignUpValidation } from "../signup-validation-factory"
+import {
+  CompareFieldsValidation,
+  RequireFieldsValidation,
+  ValidationComposite,
+  EmailValidation,
+} from '@/presentation/helpers/validators';
+import { EmailValidator, Validation } from '@/presentation/protocols';
+import { makeSignUpValidation } from '../signup-validation-factory';
 
-jest.mock('@/presentation/helpers/validators/validationsComposite.ts')
+jest.mock('@/presentation/helpers/validators/validationsComposite.ts');
 
 const makeEmailvalidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
@@ -18,20 +18,21 @@ const makeEmailvalidator = (): EmailValidator => {
   return new EmailValidatorStub();
 };
 
-
-describe('SignUp Validation', ()=> {
+describe('SignUp Validation', () => {
   it('Should call ValidationComposite with all Validation', () => {
-    makeSignUpValidation()
-    const emailValidatorStub = makeEmailvalidator()
-    const validations: Validation[] = []
+    makeSignUpValidation();
+    const emailValidatorStub = makeEmailvalidator();
+    const validations: Validation[] = [];
 
-    for (const field of ['name', 'email','password', 'passwordConfirm']) {
-      validations.push(new RequireFieldsValidation(field))
+    for (const field of ['name', 'email', 'password', 'passwordConfirm']) {
+      validations.push(new RequireFieldsValidation(field));
     }
 
-    validations.push(new CompareFieldsValidation('password', 'passwordConfirm'))
-    validations.push(new EmailValidation('email', emailValidatorStub))
+    validations.push(
+      new CompareFieldsValidation('password', 'passwordConfirm')
+    );
+    validations.push(new EmailValidation('email', emailValidatorStub));
 
-    expect(ValidationComposite).toHaveBeenCalledWith(validations)
-  })
-})
+    expect(ValidationComposite).toHaveBeenCalledWith(validations);
+  });
+});

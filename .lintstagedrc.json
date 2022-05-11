@@ -1,8 +1,6 @@
 {
   "*ts": [
-    "yarn lint && yarn lint:fix",
-    "yarn style:check && yarn style:fix",
+    "prettier --write 'src/**' --fix",
     "git add ."
-
   ]
 }

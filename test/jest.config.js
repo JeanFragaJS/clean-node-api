@@ -1,5 +1,5 @@
 const { resolve } = require("path")
-const { rootDir } = require("../jest.config")
+
 const root = resolve(__dirname, '..')
 const rootConfig = require(`${root}/jest.config.js`)
 

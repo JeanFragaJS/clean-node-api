@@ -1,22 +1,20 @@
-import { RequireFieldsValidation } from '../requireFieldsValidation'
-import { MissingParamError } from '../../../error/missing-param-error'
+import { RequireFieldsValidation } from '../requireFieldsValidation';
+import { MissingParamError } from '../../../error/missing-param-error';
 
 describe('Require Fields Validation', () => {
-  
-
   it('Should return Missing Param Error if field is not provided', async () => {
-    const sut = new RequireFieldsValidation('field')
-    const error = sut.validate({name: 'any-name'})
-       
+    const sut = new RequireFieldsValidation('field');
+    const error = sut.validate({ name: 'any-name' });
+
     expect(error).toEqual(new MissingParamError('field'));
   });
 
   it('Shoud not return if RequireFields is success', () => {
-    const sut = new RequireFieldsValidation('field')
-    const error = sut.validate({field: 'any-field'})
+    const sut = new RequireFieldsValidation('field');
+    const error = sut.validate({ field: 'any-field' });
 
-     expect(error).toBeFalsy()
-  })
+    expect(error).toBeFalsy();
+  });
 
   // it('Should return 400 if email not provided', async () => {
   //   const { sut } = makeSut();
@@ -30,7 +28,7 @@ describe('Require Fields Validation', () => {
 
   //   const httpResponse = await sut.handle(httpRequest);
   //   expect(httpResponse).toEqual(badRequest(new MissingParamError('email')))
- 
+
   // });
 
   // it('Should return 400 if password not provided', async () => {
@@ -45,7 +43,7 @@ describe('Require Fields Validation', () => {
 
   //   const httpResponse = await sut.handle(httpRequest);
   //   expect(httpResponse).toEqual( badRequest(new MissingParamError('password')));
-   
+
   // });
 
   // it('Should return 400 if passwordConfirm not provided', async () => {
@@ -60,6 +58,6 @@ describe('Require Fields Validation', () => {
 
   //   const httpResponse = await sut.handle(httpRequest);
   //   expect(httpResponse).toEqual(badRequest(new MissingParamError('passwordConfirm')));
-   
+
   // });
-})
+});

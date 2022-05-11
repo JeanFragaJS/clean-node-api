@@ -1,29 +1,28 @@
 { 
   "compilerOptions": {
     "target": "ES2021",
-    "moduleResolution": "node",
-    "module": "commonJS",
-    "lib": ["ES2021"],
-    "sourceMap":true,
+    "module": "CommonJS",
     "outDir": "dist",
-    "traceResolution": true,
+    "lib": [
+      "ESNext",
+      "ES2021"
+    ],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap":true,
+    "strict": true,
+    "strictNullChecks": true,
+    "traceResolution": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "allowSyntheticDefaultImports":true,
-   
-    //Inclui por deafault os tipos do ES2021
-    "esModuleInterop": true,
-    "allowJs": true,
-    "alwaysStrict":true,
-    // fornece ajustes de comportamento no tempo de execução do mecanismo
-    // JavaScript para melhorar o desempenho e faz com que um conjunto de 
-    // erros seja lançado em vez de ignorá-los silenciosamente.
-    "baseUrl": "src",
+    "baseUrl": ".",
     "rootDirs": [
-      "src"
+      "./src"
     ],
     "paths": {
-      "@/*": ["*"],
+      "@/*": ["./src/*"],
     },
     "experimentalDecorators": true,
     //Habilita suporte experimental para decoradores
@@ -33,12 +32,12 @@
     ]
   },
   "include": [
-    "src",
+    "./src/**/*",
   ],
 
   "exclude": [
-    "**/*.spaec.ts",
-    "**/*.test.ts"
+    "./node_modules/*",
+    "dist"
   ]
 
 }
