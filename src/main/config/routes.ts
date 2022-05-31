@@ -15,7 +15,7 @@ export default (app: Express): void => {
   readdirSync(`${__dirname}/../routes`).map( async file => {
     if (!file.includes('.spec.') && !file.includes('map')) {
       (await import(`../routes/${file}`)).default(router)
-      console.log(file)
+      //console.log(file)
     }
   })
 };

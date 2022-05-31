@@ -3,9 +3,9 @@ import {
   Controller,
   HttpRequest,
   HttpResponse,
-} from '@/presentation/protocols';
-import { serverError } from '@/presentation/helpers/http/http-helper';
-import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository';
+} from '../../../presentation/protocols';
+import { serverError } from '../../../presentation/helpers/http/http-helper';
+import { LogErrorRepository } from '../../../data/protocols/db/log/log-error-repository';
 
 describe('Logs Controllers Decorator', () => {
   const makelogErrorRepository = (): LogErrorRepository => {

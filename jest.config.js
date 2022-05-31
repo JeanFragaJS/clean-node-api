@@ -11,8 +11,13 @@ module.exports = {
   preset: 'ts-jest',
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
-    '<rootDir>/test/*.ts',
-    '<rootDir>/src/main/*.ts'
+    '!<rootDir>/src/domain/**',
+    '!<rootDir>/src/**/*-protocols.ts',
+    '!**/protocols/**',
+    '!**/util/**',
+    '!**/__test__/**',
+    '!<rootDir>/src/main/**',
+    '!<rootDir>/src/**/*error.ts'
   ],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
