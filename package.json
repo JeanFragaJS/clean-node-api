@@ -55,5 +55,8 @@
   },
   "_moduleAliases": {
     "@": "dist"
+  },
+  "engines":{
+    "node": "16.x"
   }
 }
