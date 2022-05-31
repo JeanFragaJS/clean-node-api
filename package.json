@@ -5,7 +5,7 @@
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon dist/main/server.js",
+    "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
     "dev": "ts-node --transpile-only src/main/server.ts",
     "test": "yarn test:unit && yarn test:functional  --coverage",
