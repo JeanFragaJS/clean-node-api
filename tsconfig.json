@@ -3,7 +3,10 @@
     "target": "ES2019",
     "module": "CommonJS",
     "outDir": "dist",
-    "moduleResolution": "node",
+    "lib": [
+      "ES2021"
+    ],
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "sourceMap":true,
@@ -26,11 +29,12 @@
     ]
   },
   "include": [
-    "./src/**/*"
+    "src",
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "__test__"
   ]
 
 }
