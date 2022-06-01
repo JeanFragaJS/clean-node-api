@@ -66,6 +66,6 @@ typings/
 dist
 
 # outhers
-
 huskyrc.json
 **.map
+data

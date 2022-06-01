@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "dev": "ts-node --transpile-only src/main/server.ts",
+    "dev:up": "yarn build && docker-compose up -d",
+    "dev:down": "docker-compose down",
     "test": "yarn test:unit && yarn test:functional  --coverage",
     "test:functional": "jest --projects ./test --runInBand",
     "test:unit": "jest --runInBand ",
