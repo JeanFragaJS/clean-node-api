@@ -1,0 +1,49 @@
+version: "3"
+services: 
+  mongo:
+    container-name: mongo-container
+    image: mongo:3
+    restart: always
+    volumes: 
+      - ./data:/data/db
+    ports: 
+      - "27017:27017"
+  api: 
+    container_name: api-clean-node-container
+    build: .
+    image: clean-node-api
+    restart: always
+    command: yarn start
+    volumes:
+      - ./dist: /usr/src/clean-node-api/dist
+    ports:
+      - "3535:3535"
+    links: 
+     - mongo
+
+
+# services: São os containers a serem utilizados. 
+# mongo é nome dado ao serviço
+# image: onde iremos baixar a imagem do mongo pra dentro do serviço
+# ! uma imagem pronta já. 
+# mongo:3 que vai ser o nome do repositorio a ser baixado.
+# restart: always para caso o mongodb caia ele da um up de novo
+# volumes: faz um mapeamento de uma pasta da maquina para o container
+# path do diretório absoluto
+# ports: onde iremos liberar o container  
+# api: será outro serviço 
+# build: . : no mongo colocamos image para indicar que iremos baixar uma imagem do mongo 
+# no build indicamos que a imagem será carregada a partir de um código dockerfile
+# image no api depois do build serve para indicar o nome pro container. 
+# ***build*** > assume que nossa iamgem criada no docker-file já está pronta 
+# e ele reutiliza ela. Quando se faz o copy do dist pro dist, e no código se  
+# faz um build do typescritp  recriando um novo dist, esse dist não é copyado pelo 
+# docker file pq ele use a copia em cachê. E o que pe feito no código acaba não
+# sendo aplicado no container. 
+# links: para linkar ao serviço do mongo
+# No mongoUrl do projeto local deve-se mnudar o localhost:2017 para 
+# mongo:27017 mongo = nome da imagem, pois o docker gera um dns atribuido ao nome 
+# da imagem. 
+
+
+
