@@ -16,7 +16,7 @@ services:
     restart: always
     command: bash -c "yarn install --only=prod && yarn debug"
     volumes:
-      - ./dist:/usr/src/clean-node-api/dist
+      - ./dist/:/usr/src/clean-node-api/dist
       - ./package.json:/usr/src/clean-node-api/package.json
     ports:
       - "3535:3535"
@@ -47,6 +47,9 @@ services:
 # No mongoUrl do projeto local deve-se mnudar o localhost:2017 para 
 # mongo:27017 mongo = nome da imagem, pois o docker gera um dns atribuido ao nome 
 # da imagem. 
+# Em VOLUMES ./dist/ : a barra após dist indica que qualquer 
+# arquivo que for alterado dentro de dist, não necessariamente a pasta toda,
+# é pra mudar o arquivo tbm
 
 
 
