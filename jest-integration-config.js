@@ -6,7 +6,7 @@ const jestGlobalConfig = require(`${root}/jest.config.js`)
 module.exports = { 
   ...jestGlobalConfig, 
   ...{
-    displayName: "functional-tests",
+    displayName: "integration-test",
     testMatch: ['<rootDir>/src/**/*.test.ts'],
   }
 }
