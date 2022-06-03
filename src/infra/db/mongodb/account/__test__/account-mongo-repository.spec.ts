@@ -1,6 +1,6 @@
 import { MongoHelper } from '../../helpers/mongo-helpers';
 import { AccountMongoRepository } from '../account-mongo-repository';
-import env from '../../../../../main/config/env';
+import env from '@/main/config/env';
 import { Collection } from 'mongodb';
 
 const makeSut = (): AccountMongoRepository => {
@@ -16,7 +16,7 @@ describe('Account Mongo Repository', () => {
   });
 
   beforeEach(async () => {
-    accountCollection = await MongoHelper.getCollection('accounts');
+    accountCollection = MongoHelper.getCollection('accounts');
     accountCollection.deleteMany({});
   });
 
@@ -59,7 +59,7 @@ describe('Account Mongo Repository', () => {
 
   it('Should return null if loadByEmail fails', async () => {
     const sut = makeSut();
-    const account = await sut.loadByEmail('any@mail.com');
+    const account = await sut.loadByEmail('anyYY@mail.com');
     expect(account).toBeFalsy();
   });
 
@@ -70,10 +70,11 @@ describe('Account Mongo Repository', () => {
       email: 'any@mail.com',
       password: 'any-password',
     });
-    const fakeAccount = res.ops[0];
-    expect(fakeAccount.accessToken).toBeFalsy();
-    await sut.updateAccessToken(fakeAccount._id, 'any-token');
-    const account = await accountCollection.findOne({ _id: fakeAccount._id });
+    
+    const fakeaccount = await accountCollection.findOne({_id: res.insertedId});
+    expect(fakeaccount.accessToken).toBeFalsy();
+    await sut.updateAccessToken(fakeaccount._id.toHexString(), 'any-token');
+    const account = await accountCollection.findOne({ _id: fakeaccount._id.toHexString()});
     expect(account).toBeTruthy();
     expect(account.accessToken).toBe('any-token');
   });

@@ -13,7 +13,7 @@ export default (app: Express): void => {
     do tsc.
   */
   readdirSync(`${__dirname}/../routes`).map( async file => {
-    if (!file.includes('.spec.') && !file.includes('map')) {
+    if (!file.includes('.test.') && !file.includes('map')) {
       (await import(`../routes/${file}`)).default(router)
       //console.log(file)
     }

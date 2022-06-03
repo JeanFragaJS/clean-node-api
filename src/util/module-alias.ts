@@ -1,6 +1,6 @@
 import * as path from 'path';
 import moduleAlias from 'module-alias'
 
-const files = path.resolve(__dirname, '../..');
 
-moduleAlias.addAlias('@', path.join(files, 'src'));
+const files = path.resolve(__dirname, '../..');
+moduleAlias.addAlias('@', path.join(files, '/src'));

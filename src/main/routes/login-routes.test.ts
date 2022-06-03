@@ -13,7 +13,7 @@ describe('Login Routes', () => {
   });
 
   beforeEach(async () => {
-    accountCollection = await MongoHelper.getCollection('accounts');
+    accountCollection = MongoHelper.getCollection('accounts');
     accountCollection.deleteMany({});
   });
 
