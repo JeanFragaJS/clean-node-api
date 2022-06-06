@@ -3,4 +3,4 @@ import moduleAlias from 'module-alias'
 
 
 const files = path.resolve(__dirname, '../..');
-moduleAlias.addAlias('@', path.join(files, '/src'));
+moduleAlias.addAlias('@', path.join(files, 'src'));

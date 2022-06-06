@@ -7,11 +7,10 @@ import {
   serverError,
   ok,
   Validation,
-} from '../login-controller-protocols';
-import {
   Authentication,
-  AuthenticationModel,
-} from '@/domain/usecases/authentication';
+  AuthenticationModel
+} from '../login-controller-protocols';
+
 
 const makeHttpRequest = (): HttpRequest => ({
   body: {

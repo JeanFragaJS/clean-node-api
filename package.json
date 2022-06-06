@@ -5,10 +5,10 @@
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/main/server.js",
-    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9229 --no-lazy ./dist/main/server.js",
+    "start": "node dist/src/main/server.js",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9229 --no-lazy ./dist/src/main/server.js",
     "build": "rimraf dist && tsc",
-    "dev:up": "yarn build && docker-compose up -d",
+    "dev:up": "yarn build && docker-compose up",
     "dev:down": "docker-compose down",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand -no-cache",
     "test:verbose": " jest --passWithNoTests --runInBand",
@@ -58,7 +58,7 @@
     "validator": "^13.7.0"
   },
   "_moduleAliases": {
-    "@": "dist"
+    "@": "dist/src"
   },
   "engines": {
     "node": "16.x"
