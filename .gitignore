@@ -69,5 +69,5 @@ dist
 huskyrc.json
 **.map
 data
-.husky
+
 !src/data

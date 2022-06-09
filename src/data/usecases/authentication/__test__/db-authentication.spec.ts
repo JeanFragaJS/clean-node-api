@@ -9,9 +9,7 @@ import {
 } from '../../../../data/usecases/authentication/db-authentication-protocols';
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
-  class LoadAccountByEmailRepositoryStub
-    implements LoadAccountByEmailRepository
-  {
+  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
     public loadByEmail(emai: string): Promise<AccountModel> {
       return new Promise((resolve) => resolve(makeAccountModel()));
     }
