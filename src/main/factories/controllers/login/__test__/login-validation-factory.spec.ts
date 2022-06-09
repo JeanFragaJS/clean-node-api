@@ -2,8 +2,8 @@ import {
   RequireFieldsValidation,
   ValidationComposite,
   EmailValidation,
-} from '@/presentation/helpers/validators';
-import { Validation, EmailValidator } from '@/presentation/protocols';
+} from '../../../../../presentation/helpers/validators';
+import { Validation, EmailValidator } from '../../../../../presentation/protocols';
 
 import { makeLoginValidation } from '../login-validation-factory';
 
