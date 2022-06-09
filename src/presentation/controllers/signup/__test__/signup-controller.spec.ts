@@ -8,14 +8,13 @@ import {
   Authentication,
   AuthenticationModel
 } from '../signup-controller-protocols';
-import { MissingParamError, ServerError, EmailInUseError } from '@/presentation/error';
+import { MissingParamError, ServerError, EmailInUseError } from '../../../../presentation/error';
 import {
   ok,
   serverError,
   badRequest,
   forbidden
-} from '@/presentation/helpers/http/http-helper';
-import { resolve } from 'path';
+} from '../../../../presentation/helpers/http/http-helper';
 
 jest.mock('@/presentation/helpers/validators/validationsComposite.ts');
 

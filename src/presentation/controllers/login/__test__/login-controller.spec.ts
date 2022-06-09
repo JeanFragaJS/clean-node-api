@@ -1,4 +1,4 @@
-import { MissingParamError } from '@/presentation/error';
+import { MissingParamError } from '../../../../presentation/error';
 import { LoginController } from '../login-controller';
 import {
   badRequest,
