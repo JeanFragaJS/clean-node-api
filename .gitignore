@@ -68,4 +68,6 @@ dist
 # outhers
 huskyrc.json
 **.map
-./data
+data
+.husky
+!src/data
