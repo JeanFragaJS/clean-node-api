@@ -15,11 +15,12 @@
     "test:watch": "yarn test --watch",
     "test:integration": "yarn test --config jest-integration-config.js",
     "test:unit": "yarn test --config jest-unit-config.js",
+    "test:staged": "yarn test --findRelatedTests .*.test.ts .*.spec.ts",
     "lint": "eslint --ext .ts",
     "lint:fix": "eslint --ext .ts --fix",
     "prepare": "husky install",
-    "style:check": "yarn prettier --check src/**/*.ts test/**/*.ts",
-    "style:fix": "yarn prettier --write src/**/*.ts test/**/*.ts"
+    "style:check": "yarn prettier --check src/**/*.ts ",
+    "style:fix": "yarn prettier --write src/**/*.ts "
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "3.0.1",
