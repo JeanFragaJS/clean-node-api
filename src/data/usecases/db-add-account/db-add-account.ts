@@ -8,6 +8,7 @@ import {
 } from './db-add-account-protocols';
 
 export class DbAddAccount implements AddAccount {
+  
   constructor(
     private readonly hasher: Hasher,
     private readonly addAccountRepository: AddAccountRepository,
@@ -15,12 +16,13 @@ export class DbAddAccount implements AddAccount {
   ) {}
 
   public async add(accountData: AddAccountModel): Promise<AccountModel> {
-    await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
-    const hashedPassword = await this.hasher.hash(accountData.password);
-    const account = await this.addAccountRepository.add(
-      Object.assign({}, accountData, { password: hashedPassword })
-    );
-    return account;
+    const account = await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
+    if (!account ) {
+      const hashedPassword = await this.hasher.hash(accountData.password);
+      const newAccount = await this.addAccountRepository.add( Object.assign({}, accountData, { password: hashedPassword }));
+      return newAccount;
+    }
+    return null;
     //Não vamos colocar o try-catch aqui  justamente para se caso ocorra um erro
     //ser lançado a diante
   }
