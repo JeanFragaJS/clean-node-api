@@ -1,6 +1,6 @@
 {
   "name": "clean-node-api",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "server.js",
   "author": "Jean Fraga <jeanfragoli395@gmail.com>",
   "license": "MIT",
