@@ -2,7 +2,7 @@ import {
   EmailValidation,
   RequireFieldsValidation,
   ValidationComposite,
-} from '@/validation/validators';
+} from '../../../../validation/validators';
 import { Validation } from '@/presentation/protocols';
 import { EmailValidatorAdapter } from '@/infra/validator/email-validator-adapapter';
 

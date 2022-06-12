@@ -9,7 +9,7 @@ let accountCollection: Collection;
 
 describe('Login Routes', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(env.mongoUrl);
+    await MongoHelper.connect(process.env.MONGO_URL);
   });
 
   beforeEach(async () => {
@@ -28,6 +28,7 @@ describe('Login Routes', () => {
         password: '123',
         passwordConfirm: '123',
       });
+   // console.log(response)
       expect(response.statusCode).toBe(200);
     });
   });

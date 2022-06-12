@@ -7,7 +7,7 @@ describe('Log Mongo Repository', () => {
   let errorCollection: Collection;
 
   beforeAll(async () => {
-    await MongoHelper.connect(env.mongoUrl);
+    await MongoHelper.connect( env.mongoUrl );
     //mongodb://127.0.0.1:27017/
   });
 

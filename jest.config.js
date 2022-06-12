@@ -6,7 +6,7 @@ const root = resolve(__dirname, '.')
 
 module.exports = {
   rootDir: root,
-  testEnvironment: 'node',
+  //testEnvironment: 'node',
   clearMocks: true,
   preset: '@shelf/jest-mongodb',
   collectCoverageFrom: [
