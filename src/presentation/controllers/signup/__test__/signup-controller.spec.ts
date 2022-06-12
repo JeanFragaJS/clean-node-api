@@ -16,7 +16,9 @@ import {
   forbidden
 } from '../../../../presentation/helpers/http/http-helper';
 
-jest.mock('@/presentation/helpers/validators/validationsComposite.ts');
+
+
+jest.mock('@/validation/validators/validationsComposite.ts');
 
 
 const makeAddAccount = (): AddAccount => {
